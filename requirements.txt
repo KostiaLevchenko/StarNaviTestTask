@@ -4,3 +4,9 @@ django-cors-headers==3.6.0
 requests==2.25.1
 python-dotenv==0.15.0
 djangorestframework-simplejwt==4.6.0
+django-stdimage==5.1.1
+django-dynamic-filenames==1.1.4
+django-rest-knox==4.1.0
+django-anymail==8.1
+python-decouple==3.3
+psycopg2==2.8.6
