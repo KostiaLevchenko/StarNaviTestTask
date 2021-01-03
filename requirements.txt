@@ -1,6 +1,6 @@
-Django
-djangorestframework
-django-cors-headers
-requests
-python-dotenv
-djangorestframework-simplejwt
+Django==3.1.4
+djangorestframework==3.12.2
+django-cors-headers==3.6.0
+requests==2.25.1
+python-dotenv==0.15.0
+djangorestframework-simplejwt==4.6.0
