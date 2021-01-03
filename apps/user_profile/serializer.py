@@ -1,9 +1,11 @@
 from rest_framework import serializers
 
 from apps.user_profile.models import UserProfile
+from apps.user_profile.std_image_field import StdImageField
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    avatar = StdImageField(required=False, allow_null=True)
 
     class Meta:
         model = UserProfile
