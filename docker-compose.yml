@@ -1,0 +1,60 @@
+version: '3'
+services:
+  db:
+    image: postgres:10
+    environment:
+      - POSTGRES_PASSWORD=K8qUYs4h
+    volumes:
+      - ./StarNaviTestTask/db:/docker-entrypoint-initdb.d
+    restart: on-failure
+  backend:
+    build: .
+    command: sh -c "./wait-for-it.sh db:5432 -- python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    links:
+      - db
+
+
+
+
+
+
+
+
+
+
+
+#version: "3"
+#services:
+#  db:
+#    image: postgres:10
+#    environment:
+#      - POSTGRES_PASSWORD=K8qUYs4h
+#    volumes:
+#      - ./StarNaviTestTask/db:/docker-entrypoint-initdb.d
+#    restart: on-failure
+#  backend:
+#    build:
+#      context: ./StarNaviTestTask
+#    command: sh -c "./wait-for-it.sh db:5432 -- python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+#    #command: ./wait-for-it.sh db:5432 -- python manage.py runserver 0.0.0.0:8000
+#    volumes:
+#      - ./backend:/code
+#    ports:
+#      - "8000:8000"
+#    depends_on:
+#      - db
+#    links:
+#      - db
+#    environment:
+#      - DJANGO_SETTINGS_MODULE=iqtasks.settings.dev
+#      - SECRET_KEY=testsecretkey
+#      - DEBUG=1
+#      - DOMAIN=localhost
+#      - NETWORK_PROTOCOL=http
+#      - EMAIL_ADDRESS=no-reply@iqtasks.com
