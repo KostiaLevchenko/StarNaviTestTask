@@ -6,6 +6,8 @@ from django.conf.urls.static import static
 
 from rest_framework import routers
 
+from knox.views import LogoutView
+
 from apps.user_profile import views as user_profile_views
 
 router = routers.DefaultRouter()
@@ -17,6 +19,7 @@ urlpatterns = [
     re_path('admin/', admin.site.urls),
     re_path(r'^api/auth/sign-up/', user_profile_views.RegistrationView.as_view(), name='sign-up'),
     re_path(r'^api/auth/sign-in/', user_profile_views.LoginView.as_view(), name='sign-in'),
+    re_path(r'^api/auth/logout/', LogoutView.as_view(), name='auth-logout'),
 
 ]
 
