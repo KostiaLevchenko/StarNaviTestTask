@@ -27,4 +27,4 @@ class AuthenticationService:
             user.is_active = True
             user.save()
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-            return 'Thank you for your email confirmation. Now you can log into your account.'
+            return 'Thank you for your email confirmation. Now you can log into your profile.'
