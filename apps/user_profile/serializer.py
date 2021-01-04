@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from apps.user_profile.models import UserProfile
-from apps.user_profile.std_image_field import StdImageField
+from apps.user_profile.utils.std_image_field import StdImageField
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
