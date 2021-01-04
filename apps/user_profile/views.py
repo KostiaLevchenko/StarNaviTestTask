@@ -23,6 +23,17 @@ class RegistrationView(ObtainAuthToken):
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+class LoginView(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        try:
+            data = request.data.copy()
+            profile = UserProfileService.get(profile_data=data)
+            AuthenticationService.obtain_token(user=profile.get('user'), profile=profile.get('profile'))
+            return Response(profile.get('profile'), status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 class AuthConfirm(viewsets.ModelViewSet):
     permission_classes = [CurrentUserOrSafeMethod]
 
@@ -33,16 +44,5 @@ class AuthConfirm(viewsets.ModelViewSet):
             token_b64 = request.GET['token']
             profile = AuthenticationService.activate_profile(request=request, uid_b64=uid_b64, token_b64=token_b64)
             return HttpResponse(profile)
-        except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-
-class LoginView(ObtainAuthToken):
-    def post(self, request, *args, **kwargs):
-        try:
-            data = request.data.copy()
-            profile = UserProfileService.get(profile_data=data)
-            AuthenticationService.obtain_token(user=profile.get('user'), profile=profile.get('profile'))
-            return Response(profile.get('profile'), status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
