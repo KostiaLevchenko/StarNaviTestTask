@@ -23,3 +23,9 @@ class PostService:
         post_instance = Post.objects.get(pk=post_id)
         post_instance.likes.add(profile.get('profile').get('id'))
         return get_post_data(post_instance=post_instance)
+
+    @staticmethod
+    def unlike(post_id, profile):
+        post_instance = Post.objects.get(pk=post_id)
+        post_instance.likes.remove(profile.get('profile').get('id'))
+        return get_post_data(post_instance=post_instance)
