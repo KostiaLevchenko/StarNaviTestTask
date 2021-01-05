@@ -24,3 +24,12 @@ class PostViewSet(viewsets.ModelViewSet):
             return Response(post, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    @action(detail=False, methods=['GET'])
+    def like(self, request, *args, **kwargs):
+        try:
+            profile = UserProfileService.get(profile_data={'email': request.user})
+            like = PostService.like(post_id=self.request.query_params.get('id'), profile=profile)
+            return Response(like, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
