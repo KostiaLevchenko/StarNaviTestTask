@@ -16,3 +16,11 @@ class PostViewSet(viewsets.ModelViewSet):
             return Response(post, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    @action(detail=False, methods=['GET'])
+    def get_post(self, request, *args, **kwargs):
+        try:
+            post = PostService.get(post_id=self.request.query_params.get('id'))
+            return Response(post, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
