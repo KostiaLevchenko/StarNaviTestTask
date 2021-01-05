@@ -35,3 +35,9 @@ class UserProfileService:
         profile = connect_user_to_profile(profile=profile_instance, user=user)
         profile = get_profile_data(profile_instance=profile)
         return {'profile': profile, 'user': user}
+
+    @staticmethod
+    def get_user_activity(profile_id):
+        profile_instance = UserProfile.objects.get(pk=profile_id)
+        user = User.objects.get(email=profile_instance.email)
+        return {'last_login': user.last_login}
