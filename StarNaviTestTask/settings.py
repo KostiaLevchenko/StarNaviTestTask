@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 
     # own apps
     'apps.user_profile',
+    'apps.post',
 ]
 
 EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
