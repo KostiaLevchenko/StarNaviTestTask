@@ -17,3 +17,9 @@ class PostService:
         serializer.is_valid(raise_exception=True)
         post_instance = serializer.create(validated_data=serializer.validated_data)
         return get_post_data(post_instance=post_instance)
+
+    @staticmethod
+    def like(post_id, profile):
+        post_instance = Post.objects.get(pk=post_id)
+        post_instance.likes.add(profile.get('profile').get('id'))
+        return get_post_data(post_instance=post_instance)
