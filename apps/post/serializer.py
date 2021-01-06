@@ -4,7 +4,6 @@ from apps.post.models import Post
 
 
 class PostSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Post
         fields = ('title', 'body', 'author', 'creation_date')

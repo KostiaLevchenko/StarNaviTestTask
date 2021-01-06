@@ -45,8 +45,8 @@ EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
 EMAIL_ADDRESS = config('EMAIL_ADDRESS')
 
 ANYMAIL = {
-    "MAILGUN_API_KEY": f"{config('MAILGUN_API_KEY', '')}",
-    "MAILGUN_SENDER_DOMAIN": f"{config('MAILGUN_SENDER_DOMAIN', '')}",
+    'MAILGUN_API_KEY': f"{config('MAILGUN_API_KEY', '')}",
+    'MAILGUN_SENDER_DOMAIN': f"{config('MAILGUN_SENDER_DOMAIN', '')}",
 }
 
 MIDDLEWARE = [

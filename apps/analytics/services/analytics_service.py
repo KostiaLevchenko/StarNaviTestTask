@@ -8,7 +8,6 @@ from apps.user_profile.models import UserProfile
 
 
 class AnalyticsService:
-
     @staticmethod
     def get_user_activity(profile_id):
         profile_instance = UserProfile.objects.get(pk=profile_id)
