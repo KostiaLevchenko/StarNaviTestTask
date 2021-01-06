@@ -3,7 +3,7 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 
 
-def send_email_from_template(subject="", recipient_list=None, template="", template_variables=None):
+def send_email_from_template(subject='', recipient_list=None, template='', template_variables=None):
     if template_variables is None:
         template_variables = {}
     template_variables['site_url'] = f'{settings.NETWORK_PROTOCOL}://{settings.DOMAIN}/'

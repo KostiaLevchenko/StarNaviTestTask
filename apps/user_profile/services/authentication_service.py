@@ -1,5 +1,5 @@
-from django.contrib.auth.models import User
 from django.contrib.auth import login
+from django.contrib.auth.models import User
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 
@@ -9,7 +9,6 @@ from apps.user_profile.utils.token_generator import account_activation_token
 
 
 class AuthenticationService:
-
     @staticmethod
     def obtain_token(user, profile):
         token, key = AuthToken.objects.create(user=user)

@@ -13,7 +13,6 @@ from apps.user_profile.utils.utils import (
 
 
 class UserProfileService:
-
     @staticmethod
     def get(profile_data):
         user = User.objects.get(email=profile_data.get('email'))
@@ -45,7 +44,6 @@ class UserProfileService:
         serializer = UserProfileSerializer(data=last_activity_date_time, partial=True)
         serializer.is_valid(raise_exception=True)
         updated_profile_instance = serializer.update_last_activity(
-            instance=profile_instance,
-            validated_data=serializer.validated_data
+            instance=profile_instance, validated_data=serializer.validated_data
         )
         return get_profile_data(profile_instance=updated_profile_instance)

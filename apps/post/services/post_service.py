@@ -4,7 +4,6 @@ from apps.post.utils.utils import get_post_data
 
 
 class PostService:
-
     @staticmethod
     def get(post_id):
         post_instance = Post.objects.get(pk=post_id)

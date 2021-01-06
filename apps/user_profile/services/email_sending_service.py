@@ -7,7 +7,6 @@ from apps.user_profile.utils.token_generator import account_activation_token
 
 
 class EmailSendingService:
-
     @staticmethod
     def send_profile_activation_email(user):
         profile_instance = UserProfile.objects.get(email=user)

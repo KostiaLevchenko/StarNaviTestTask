@@ -6,7 +6,6 @@ from rest_framework import serializers
 
 
 class StdImageField(serializers.ImageField):
-
     def to_representation(self, obj):
         return_object = {}
         field = obj.field
