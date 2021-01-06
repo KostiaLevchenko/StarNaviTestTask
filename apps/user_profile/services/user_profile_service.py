@@ -40,12 +40,6 @@ class UserProfileService:
         return {'profile': profile, 'user': user}
 
     @staticmethod
-    def get_user_activity(profile_id):
-        profile_instance = UserProfile.objects.get(pk=profile_id)
-        user = User.objects.get(email=profile_instance.email)
-        return {'last_login': user.last_login, 'last_activity': profile_instance.last_activity}
-
-    @staticmethod
     def update_user_last_activity(user, last_activity_date_time):
         profile_instance = UserProfile.objects.get(user=user)
         serializer = UserProfileSerializer(data=last_activity_date_time, partial=True)

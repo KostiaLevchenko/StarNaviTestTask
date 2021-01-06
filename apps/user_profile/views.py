@@ -46,14 +46,3 @@ class AuthConfirm(viewsets.ModelViewSet):
             return HttpResponse(profile)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-
-class UserProfileViewSet(viewsets.ModelViewSet):
-    @action(detail=False, methods=['GET'])
-    def get_user_activity(self, request, *args, **kwargs):
-        try:
-            user_activity = UserProfileService.get_user_activity(profile_id=self.request.query_params.get('id'))
-            return Response(user_activity, status=status.HTTP_200_OK)
-        except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-

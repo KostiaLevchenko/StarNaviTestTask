@@ -5,6 +5,11 @@ from rest_framework.response import Response
 
 from apps.post.services.post_service import PostService
 from apps.user_profile.services.user_profile_service import UserProfileService
+from apps.post.models import Like
+from django.forms.models import model_to_dict
+from datetime import datetime
+from django.db.models import Count
+from django.db.models.functions import TruncDay
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -42,3 +47,21 @@ class PostViewSet(viewsets.ModelViewSet):
             return Response(like, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    @action(detail=False, methods=['GET'])
+    def analytics(self, request, *args, **kwargs):
+        try:
+            date_from = self.request.query_params.get('date_from')
+            date_to = self.request.query_params.get('date_to')
+            likes = Like.objects.\
+                filter(
+                    like_date__range=(datetime.strptime(date_from, '%Y-%m-%d'), datetime.strptime(date_to, '%Y-%m-%d'))
+                )\
+                .annotate(day=TruncDay('like_date'))\
+                .values('day')\
+                .annotate(likes_per_day=Count('id'))\
+                .order_by()
+            return Response(list(likes), status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
