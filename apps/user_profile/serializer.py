@@ -9,7 +9,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserProfile
-        fields = ('email', 'username', 'first_name', 'last_name', 'avatar', 'user')
+        fields = ('email', 'username', 'first_name', 'last_name', 'avatar', 'user', 'last_activity')
 
     def create(self, validated_data):
         user_profile = UserProfile.objects.create(**validated_data)
@@ -22,5 +22,10 @@ class UserProfileSerializer(serializers.ModelSerializer):
         instance.last_name = validated_data.get('last_name', instance.last_name)
         instance.avatar = validated_data.get('avatar', instance.avatar)
         instance.user = validated_data.get('user', instance.user)
+        instance.save()
+        return instance
+
+    def update_last_activity(self, instance, validated_data):
+        instance.last_activity = validated_data.get('last_activity', instance.last_activity)
         instance.save()
         return instance
