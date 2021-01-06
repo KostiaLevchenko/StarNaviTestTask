@@ -16,7 +16,4 @@ class UserProfile (AbstractBaseUser):
         'small': {"width": 50, "height": 50, "crop": True},
     }, null=True, blank=True)
     user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='profiles', on_delete=models.CASCADE, null=True)
-
-    def __str__(self):
-        return f'id: {self.id}, email: {self.email}, username: {self.username}, first_name: {self.first_name}, ' \
-               f'last_name: {self.last_name}, avatar: {self.avatar}, user: {self.user}'
+    last_activity = models.DateTimeField()
