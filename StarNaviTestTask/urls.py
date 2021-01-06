@@ -10,11 +10,12 @@ from knox.views import LogoutView
 
 from apps.post import views as post_views
 from apps.user_profile import views as user_profile_views
+from apps.analytics import views as analytics_views
 
 router = routers.DefaultRouter()
 router.register(r'post', post_views.PostViewSet, basename='post')
 router.register(r'auth-confirm', user_profile_views.AuthConfirm, basename='auth-confirm')
-router.register(r'profile', user_profile_views.UserProfileViewSet, basename='profile')
+router.register(r'analytics', analytics_views.AnalyticsViewSet, basename='analytics')
 
 
 urlpatterns = [
