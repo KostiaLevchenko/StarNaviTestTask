@@ -57,6 +57,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # custom middlewares
+    'middlewares.user_activity_middleware.UserActivityMiddleware'
 ]
 
 ROOT_URLCONF = 'StarNaviTestTask.urls'
