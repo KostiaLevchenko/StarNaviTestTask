@@ -34,3 +34,10 @@ def get_profile_data(profile_instance):
     del profile['password']
     del profile['user']
     return profile
+
+
+def create_user_for_bot(email, password):
+    user = get_user_model().objects.create(username=email, email=email, is_active=True)
+    user.set_password(password)
+    user.save()
+    return user
