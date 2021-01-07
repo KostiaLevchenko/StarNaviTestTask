@@ -46,3 +46,13 @@ class AuthConfirm(viewsets.ModelViewSet):
             return HttpResponse(profile)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    @action(detail=False, methods=['POST'])
+    def create_user_with_bot(self, request, *args, **kwargs):
+        try:
+            data = request.data.copy()
+            profile = UserProfileService.create_user_with_bot(profile_data=data)
+            AuthenticationService.obtain_token(user=profile.get('user'), profile=profile.get('profile'))
+            return Response(profile.get('profile'), status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
