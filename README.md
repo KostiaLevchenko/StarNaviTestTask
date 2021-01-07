@@ -1,5 +1,4 @@
 # StarNaviTestTask
-# StarNaviTestTask
 Hello `StarNavi` team!
 
 # Project set-up
